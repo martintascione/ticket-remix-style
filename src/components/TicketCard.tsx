@@ -1,7 +1,7 @@
 
 import { Card } from "@/components/ui/card";
 import Logo from "@/components/Logo";
-import { Barcode, Calendar, CheckCircle } from "lucide-react";
+import { Barcode, Calendar, CheckCircle, Circle } from "lucide-react";
 
 const TicketCard = () => {
   const ticketData = {
@@ -67,7 +67,10 @@ const TicketCard = () => {
           <div className="space-y-0.5">
             {ticketData.items.map((item, index) => (
               <div key={index} className="flex justify-between text-sm py-0.5 items-center">
-                <span className="text-gray-700">{item.description}</span>
+                <div className="flex items-center">
+                  <Circle className="w-2 h-2 mr-2 fill-blue-500 text-blue-500" />
+                  <span className="text-gray-700">{item.description}</span>
+                </div>
                 <span className="font-medium text-gray-800">{typeof item.price === 'number' ? `$${item.price.toFixed(2)}` : item.price}</span>
               </div>
             ))}
