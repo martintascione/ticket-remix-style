@@ -1,8 +1,22 @@
 
+import React from 'react';
 import { Card } from "@/components/ui/card";
-import Logo from "@/components/Logo";
 import { Barcode, Calendar, CheckCircle, Circle } from "lucide-react";
 
+// Logo Component
+const Logo = () => {
+  return (
+    <div className="relative w-24 h-24">
+      <img 
+        src="/lovable-uploads/5ec74454-5387-4fbf-9ee6-6f34e6dc4e9f.png" 
+        alt="IMPORTAR Logo" 
+        className="w-full h-full object-contain"
+      />
+    </div>
+  );
+};
+
+// Ticket Component
 const TicketCard = () => {
   const ticketData = {
     company: "ESIMPORTAR SRL",
@@ -154,4 +168,14 @@ const TicketCard = () => {
   );
 };
 
-export default TicketCard;
+// Main Container Component
+const TicketSystem = () => {
+  return (
+    <div className="ticket-container">
+      <TicketCard />
+    </div>
+  );
+};
+
+export { TicketSystem, TicketCard, Logo };
+export default TicketSystem;

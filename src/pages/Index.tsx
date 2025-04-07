@@ -1,12 +1,8 @@
 
-import TicketCard from "@/components/TicketCard";
+import TicketSystem from "@/components/TicketSystem";
 
 const Index = () => {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-white p-6">
-      <TicketCard />
-    </div>
-  );
+  return <TicketSystem />;
 };
 
 export default Index;
