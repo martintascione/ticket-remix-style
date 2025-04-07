@@ -28,9 +28,12 @@ const TicketCard = () => {
     footer: "IMPORTACIONES PERSONALES / EMPRESAS / RURALES"
   };
 
-  // Helper function to check if an item is an IVA (tax) item
-  const isIvaItem = (description: string) => {
-    return description.toLowerCase().includes('iva');
+  // Helper function to check if an item should have a dot
+  const shouldShowDot = (description: string) => {
+    // Don't show dot for IVA items, weight items or shipping items
+    return !description.toLowerCase().includes('iva') && 
+           !description.toLowerCase().includes('peso') &&
+           !description.toLowerCase().includes('envío');
   };
 
   return (
@@ -73,10 +76,9 @@ const TicketCard = () => {
             {ticketData.items.map((item, index) => (
               <div key={index} className="flex justify-between text-sm py-0.5 items-center">
                 <div className="flex items-center">
-                  {!isIvaItem(item.description) && (
+                  {shouldShowDot(item.description) ? (
                     <Circle className="w-2 h-2 mr-2 fill-blue-500 text-blue-500" />
-                  )}
-                  {isIvaItem(item.description) && (
+                  ) : (
                     <div className="w-2 mr-2"></div>
                   )}
                   <span className="text-gray-700">{item.description}</span>
