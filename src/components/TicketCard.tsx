@@ -30,10 +30,19 @@ const TicketCard = () => {
 
   // Helper function to check if an item should have a dot
   const shouldShowDot = (description: string) => {
-    // Don't show dot for IVA items, weight items or shipping items
-    return !description.toLowerCase().includes('iva') && 
-           !description.toLowerCase().includes('peso') &&
-           !description.toLowerCase().includes('envío');
+    // Show dot for products and the shipping item (Envío MIAMI - CABA)
+    // Don't show dot for IVA items, weight items or IVA shipping items
+    if (description.toLowerCase().includes('iva')) return false;
+    if (description.toLowerCase().includes('peso')) return false;
+    
+    // Specifically allow "Envío MIAMI - CABA" to have a dot
+    if (description === "Envío MIAMI - CABA") return true;
+    
+    // For other items that contain "envío" in different formats, don't show dot
+    if (description.toLowerCase().includes('envío') && description !== "Envío MIAMI - CABA") return false;
+    
+    // For all other items (products), show dot
+    return true;
   };
 
   return (
