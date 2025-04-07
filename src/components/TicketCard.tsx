@@ -57,16 +57,16 @@ const TicketCard = () => {
           </div>
         </div>
         
-        {/* Items */}
+        {/* Items - REDUCED SPACING HERE */}
         <div className="mb-6">
-          <div className="flex justify-between font-medium mb-3 text-sm text-gray-700 border-b pb-2">
+          <div className="flex justify-between font-medium mb-2 text-sm text-gray-700 border-b pb-2">
             <span>DESCRIPCIÓN</span>
             <span>PRECIOS</span>
           </div>
           
-          <div className="space-y-2">
+          <div className="space-y-0.5">
             {ticketData.items.map((item, index) => (
-              <div key={index} className="flex justify-between text-sm py-1 items-center">
+              <div key={index} className="flex justify-between text-sm py-0.5 items-center">
                 <span className="text-gray-700">{item.description}</span>
                 <span className="font-medium text-gray-800">{typeof item.price === 'number' ? `$${item.price.toFixed(2)}` : item.price}</span>
               </div>
