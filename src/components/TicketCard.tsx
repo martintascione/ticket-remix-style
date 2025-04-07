@@ -1,6 +1,7 @@
 
 import { Card } from "@/components/ui/card";
 import Logo from "@/components/Logo";
+import { Barcode, Calendar, CheckCircle } from "lucide-react";
 
 const TicketCard = () => {
   const ticketData = {
@@ -28,110 +29,100 @@ const TicketCard = () => {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto overflow-hidden shadow-lg">
-      {/* Ticket header with perforated edge */}
-      <div className="relative">
-        <div className="absolute top-0 left-0 right-0 h-2 flex">
-          {[...Array(24)].map((_, i) => (
-            <div key={i} className="flex-1 bg-gray-200 mx-0.5 rounded-b-sm"></div>
-          ))}
-        </div>
-      </div>
+    <Card className="w-full max-w-md mx-auto overflow-hidden shadow-lg rounded-lg bg-white relative">
+      {/* Colored top stripe */}
+      <div className="h-2 bg-gradient-to-r from-blue-500 to-purple-500"></div>
       
-      <div className="pt-6 px-6 pb-4">
+      <div className="pt-6 px-8 pb-6">
         {/* Company Header */}
-        <div className="text-center mb-4">
-          <h1 className="text-xl font-bold tracking-wider">{ticketData.company}</h1>
-          <p className="text-sm text-gray-600">{ticketData.location}</p>
-          <p className="text-sm text-gray-600">{ticketData.phone}</p>
+        <div className="text-center mb-6">
+          <h1 className="text-xl font-bold tracking-wide text-gray-800">{ticketData.company}</h1>
+          <p className="text-sm text-gray-600 font-medium">{ticketData.location}</p>
+          <p className="text-sm text-gray-500">{ticketData.phone}</p>
         </div>
         
-        <Divider />
-        
-        {/* Título y Cliente */}
-        <div className="text-center mb-2">
-          <h2 className="text-2xl font-bold text-gray-800 mb-1">{ticketData.title}</h2>
-          <div className="flex justify-center text-sm text-gray-600">
-            <span className="font-semibold mr-1">Cliente:</span> {ticketData.client} 
-            <span className="mx-2">|</span>
-            <span className="font-semibold mr-1">Fecha:</span> {ticketData.date}
+        {/* Title and Client Info */}
+        <div className="bg-gray-50 rounded-lg p-4 mb-6 border border-gray-100">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800">{ticketData.title}</h2>
+              <div className="flex items-center mt-1 text-sm text-gray-600">
+                <span className="font-medium mr-1">Cliente:</span> {ticketData.client}
+              </div>
+            </div>
+            <div className="flex items-center text-gray-600 bg-white p-2 rounded border border-gray-100">
+              <Calendar className="w-4 h-4 mr-1" />
+              <span className="text-sm font-medium">{ticketData.date}</span>
+            </div>
           </div>
         </div>
-        
-        <Divider />
         
         {/* Items */}
-        <div className="mb-4">
-          <div className="flex justify-between font-medium mb-2">
-            <span className="text-gray-700">DESCRIPCIÓN</span>
-            <span className="text-gray-700">PRECIOS</span>
+        <div className="mb-6">
+          <div className="flex justify-between font-medium mb-3 text-sm text-gray-700 border-b pb-2">
+            <span>DESCRIPCIÓN</span>
+            <span>PRECIOS</span>
           </div>
           
-          {ticketData.items.map((item, index) => (
-            <div key={index} className="flex justify-between text-sm py-1">
-              <span className="text-gray-800">{item.description}</span>
-              <span className="text-gray-800">{typeof item.price === 'number' ? `$${item.price.toFixed(2)}` : item.price}</span>
+          <div className="space-y-2">
+            {ticketData.items.map((item, index) => (
+              <div key={index} className="flex justify-between text-sm py-1 items-center">
+                <span className="text-gray-700">{item.description}</span>
+                <span className="font-medium text-gray-800">{typeof item.price === 'number' ? `$${item.price.toFixed(2)}` : item.price}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        <div className="border-t border-dashed border-gray-300 my-4"></div>
+        
+        {/* Summary */}
+        <div className="mb-4 bg-gray-50 rounded-lg p-4 border border-gray-100">
+          <h3 className="text-lg font-bold text-gray-800 mb-3">Resumen</h3>
+          
+          <div className="space-y-2">
+            <div className="flex justify-between text-sm py-1">
+              <span className="text-gray-700">Productos</span>
+              <span className="font-medium">${ticketData.summary.products.toFixed(2)}</span>
             </div>
-          ))}
-        </div>
-        
-        <Divider />
-        
-        {/* Resumen */}
-        <div className="text-center mb-2">
-          <h3 className="text-lg font-semibold text-gray-800">Resumen</h3>
-        </div>
-        
-        <Divider />
-        
-        {/* Summary Details */}
-        <div className="mb-4">
-          <div className="flex justify-between text-sm py-1">
-            <span className="text-gray-800">Productos</span>
-            <span className="text-gray-800">${ticketData.summary.products.toFixed(2)}</span>
+            <div className="flex justify-between text-sm py-1">
+              <span className="text-gray-700">Envío + Impuestos</span>
+              <span className="font-medium">${ticketData.summary.shipping.toFixed(2)}</span>
+            </div>
           </div>
-          <div className="flex justify-between text-sm py-1">
-            <span className="text-gray-800">Envío + Impuestos</span>
-            <span className="text-gray-800">${ticketData.summary.shipping.toFixed(2)}</span>
+          
+          <div className="border-t border-gray-200 mt-3 pt-3">
+            <div className="flex justify-between items-center">
+              <span className="font-bold text-gray-900">Total</span>
+              <span className="text-lg font-bold text-blue-600">${ticketData.summary.total.toFixed(2)}</span>
+            </div>
           </div>
         </div>
         
-        <Divider />
-        
-        {/* Total */}
-        <div className="flex justify-between items-center py-2">
-          <span className="text-lg font-bold">Total</span>
-          <span className="text-lg font-bold">${ticketData.summary.total.toFixed(2)}</span>
+        {/* Status */}
+        <div className="flex items-center justify-center my-4 bg-green-50 text-green-700 py-2 px-4 rounded-full text-sm">
+          <CheckCircle className="w-4 h-4 mr-2" /> Presupuesto válido por 7 días
         </div>
-        
-        <Divider />
         
         {/* Footer */}
-        <div className="text-center text-sm text-gray-600 mt-4 mb-2">
+        <div className="text-center text-sm text-gray-600 mt-6 mb-3">
           {ticketData.footer}
         </div>
         
-        {/* Logo */}
-        <div className="flex justify-center mt-4 mb-2">
+        {/* Barcode and Logo */}
+        <div className="flex flex-col items-center mt-4">
+          <div className="flex items-center justify-center mb-3 text-gray-400">
+            <Barcode className="w-6 h-6 mr-1" />
+            <span className="font-mono text-xs">ES2504072025</span>
+          </div>
           <Logo />
         </div>
       </div>
       
-      {/* Bottom perforated edge */}
-      <div className="relative">
-        <div className="absolute bottom-0 left-0 right-0 h-2 flex">
-          {[...Array(24)].map((_, i) => (
-            <div key={i} className="flex-1 bg-gray-200 mx-0.5 rounded-t-sm"></div>
-          ))}
-        </div>
-      </div>
+      {/* Colored bottom stripe */}
+      <div className="h-2 bg-gradient-to-r from-blue-500 to-purple-500"></div>
     </Card>
   );
-};
-
-// Helper component for dividers
-const Divider = () => {
-  return <div className="border-t border-dashed border-gray-300 my-3" />;
 };
 
 export default TicketCard;
